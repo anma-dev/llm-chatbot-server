@@ -1,6 +1,6 @@
 # Horace: LLM Chatbot Server with ChatGPT Plugins
 
-**Important:** The war in Ukraine is still ongoing. Every day, Russian soldiers rape, murder, torture and deport Ukrainian civilians. Visit [this page](https://war.ukraine.ua/support-ukraine/) to see how you can support Ukraine today.
+**Important:** The war in Ukraine is still ongoing. Every day, Russian soldiers rape, murder, torture and deport Ukrainian civilians. Visit [this page] to see how you can support Ukraine today.
 
 Horace lets you implement a custom chatbot with your choice of an LLM and a set of ChatGPT plugins. It runs as a WebSocket server, allowing you to easily add an LLM-powered chatbot to your web or mobile app.
 
@@ -15,11 +15,7 @@ Features:
 * Request validation for the plugins according to their OpenAPI specifications
 * Prompt customization for fine-grained instructions.
 
-Horace builds upon and extends [GRACE](https://github.com/artmatsak/grace), my original LLM-powered chatbot. Here is Horace running in debug mode with the Klarna ChatGPT plugin, accessed via a web client:
-
-<div align="center">
-  <video src="https://user-images.githubusercontent.com/5328078/230124595-203b4316-e5f8-4d6b-b0b8-b3d0d6609756.mp4" />
-</div>
+Horace builds upon and extends [GRACE], my original LLM-powered chatbot. Here is Horace running in debug mode with the Klarna ChatGPT plugin, accessed via a web client:
 
 ## Quick Start
 
@@ -109,16 +105,6 @@ See `config.yaml` for switching between the OpenAI API models.
 
 ## Using ChatGPT Plugins
 
-Horace works with ChatGPT plugins out of the box. To enable a plugin, add its hostname with an optional port number to the `plugins` section in `config.yaml`:
-
-```
-router:
-  plugins:
-    # For https://github.com/artmatsak/chatgpt-todo-plugin/
-    # - localhost:5002
-    - www.klarna.com
-```
-
 Upon starting, the server requests `http://[hostname]/.well-known/ai-plugin.json` for each plugin and takes it from there to load them.
 
 Horace currently supports the `none`, `user_http` and `server_http` auth methods for ChatGPT plugins. If an auth token is required for a plugin, Horace asks you for one during server startup. At the moment, auth tokens are saved unencrypted in `.plugin_auth.json`.
@@ -127,7 +113,7 @@ Horace currently supports the `none`, `user_http` and `server_http` auth methods
 
 The default LLM prompt for Horace is designed to make the bot neutral. The bot is neither limited to plugin-facilitated user requests (like a restaurant booking bot would be, for example), nor does it proactively push the plugin-enabled functionality onto the user. In other words, you can chat with the bot like you normally would with ChatGPT; if the bot feels that invoking a plugin method is needed, it will do so.
 
-In real-world scenarios, you may want to limit the bot to a particular scope like booking a table (see [GRACE's prompt](https://github.com/artmatsak/grace/blob/master/grace_chatbot.py#L11) for inspiration), or perhaps provide it with a unique voice/personality. To do this, you can add instructions to the LLM prompt using the `extra_instructions` property in `config.yaml`:
+In real-world scenarios, you may want to limit the bot to a particular scope like booking a table (see [GRACE's prompt] for inspiration), or perhaps provide it with a unique voice/personality. To do this, you can add instructions to the LLM prompt using the `extra_instructions` property in `config.yaml`:
 
 ```
 horace:
